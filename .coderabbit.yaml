@@ -1,0 +1,25 @@
+language: "en-US"
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  path_filters:
+    - "!frontend/src/assets/**"
+    - "!data/static/**"
+  path_instructions:
+    - path: "routes/**"
+      instructions: |
+        These are Express API endpoints. Focus on injection risks
+        (SQL/NoSQL via Sequelize raw queries), missing input validation,
+        authn/authz gaps, and unsafe deserialization.
+    - path: "lib/insecurity.ts"
+      instructions: |
+        Flag weak cryptography, hardcoded secrets, and insecure
+        JWT handling.
+    - path: "test/**"
+      instructions: |
+        Verify new endpoints have corresponding security test coverage.
+tools:
+  semgrep:
+    enabled: true
+  gitleaks:
+    enabled: true
